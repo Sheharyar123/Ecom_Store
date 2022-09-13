@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import date, timedelta
 from django.template.defaultfilters import slugify
+from django.urls import reverse
 
 # Create your models here.
 class Item(models.Model):
@@ -38,7 +39,9 @@ class Item(models.Model):
         self.slug = slugify(self.title)
         super(Item, self).save(*args, **kwargs)
 
-    # def get_absolute_url():
+    def get_absolute_url(self):
+        return reverse("base:item_detail", kwargs={"slug": self.slug})
+    
 
     @property
     def imageurl(self): 

@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'sorl.thumbnail',
+    'dummy_thumbnails',
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'
@@ -57,6 +59,9 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 LOGIN_REDIRECT_URL = 'base:index'
 ACCOUNT_LOGOUT_REDIRECT_URL = 'base:index'
 ACCOUNT_SESSION_REMEMBER = True
+
+THUMBNAIL_DUMMY = True
+THUMBNAIL_DUMMY_SOURCE = "http://placehold.it/%(width)sx%(height)s"
 
 
 MIDDLEWARE = [

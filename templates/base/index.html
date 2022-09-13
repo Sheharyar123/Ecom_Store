@@ -1,4 +1,6 @@
 {% extends '_main.html' %}
+{% load thumbnail %}
+{% load static %}
 
 {% block title %}Home{% endblock title %}
 
@@ -226,8 +228,8 @@
             {% for item_category in categories %}
             <li class="nav-item">
                 <a class="nav-link" 
-                href="{% url 'base:index' %}?q={{ item_category.get_category_display|lower }}">
-                {{ item_category.get_category_display }}s</a>
+                href="{% url 'base:index' %}?q={{ item_category.category|lower }}">
+                {{ item_category.category|capfirst }}s</a>
             </li>
             {% endfor %}
             {% comment %} <li class="nav-item">
@@ -266,26 +268,30 @@
             <div class="card">
                 <!--Card image-->
                 <div class="view overlay">
-                <img
-                    src="{{ item.imageurl }}"
-                    class="card-img-top"
-                    alt=""
-                />
-                <a>
-                    <div class="mask rgba-white-slight"></div>
-                </a>
+                    {% thumbnail item.image "200x220" crop="center" as im %}
+                    <img
+                        src="{{ im.url }}"
+                        width="{{ im.width }}"
+                        height="{{ im.height }}"
+                        class="card-img-top"
+                        alt=""
+                    />
+                    {% endthumbnail %}
+                    <a href="{{ item.get_absolute_url }}">
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
                 </div>
                 <!--Card image-->
 
                 <!--Card content-->
                 <div class="card-body text-center">
                 <!--Category & Title-->
-                <a href="" class="grey-text">
+                <a href="{{ item.get_absolute_url }}" class="grey-text">
                     <h5>{{ item.get_category_display }}</h5>
                 </a>
                 <h5>
                     <strong>
-                    <a href="" class="dark-grey-text"
+                    <a href="{{ item.get_absolute_url }}" class="dark-grey-text"
                         >{{ item.title }}
                         <span class="badge badge-pill {{ item.label }}-color">{{ item.get_label_display|upper }}</span>
                     </a>
