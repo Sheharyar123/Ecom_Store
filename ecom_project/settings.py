@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'sorl.thumbnail',
-    'dummy_thumbnails',
+    'crispy_forms',
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'
@@ -153,3 +153,5 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

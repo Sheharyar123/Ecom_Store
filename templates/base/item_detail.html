@@ -12,11 +12,16 @@
         <div class="row wow fadeIn">
           <!--Grid column-->
           <div class="col-md-5 mb-4">
+          {% thumbnail item.image "350x400" crop="center" as im %}
             <img
-              src="{{ item.imageurl }}"
-              class="img-fluid"
-              alt=""
+                src="{{ im.url }}"
+                width="{{ im.width }}"
+                height="{{ im.height }}"
+                class="img-fluid"
+                alt=""
             />
+            {% endthumbnail %}
+          
           </div>
           <!--Grid column-->
 
@@ -26,7 +31,7 @@
             <div class="p-4">
               <div class="mb-3">
                 <a href="">
-                  <span class="badge {{ item.label }}-color">{{ item.get_label_display|upper }}</span>
+                    <span class="badge purple mr-1">{{ object.get_category_display|upper }}</span>
                 </a>
               </div>
 
@@ -70,6 +75,7 @@
 
         <hr />
 
+        {% if related_products %}
         <!--Grid row-->
         <div class="row d-flex justify-content-center wow fadeIn">
           <!--Grid column-->
@@ -79,6 +85,7 @@
           <!--Grid column-->
         </div>
         <!--Grid row-->
+        {% endif %}
 
         <!--Grid row-->
         <div class="row wow fadeIn">
@@ -119,11 +126,13 @@
                 </h5>
 
                 <h4 class="font-weight-bold blue-text">
-                    {% if item.discount_price %}
-                    <strong>120$</strong>
-                    {% else %}
-                    <strong>${{ item.price }}</strong>
-                    {% endif %}
+                    <strong>$
+                        {% if item.discount_price %}
+                        {{ item.discount_price }}
+                        {% else %}
+                        {{ item.price }}
+                        {% endif %}
+                    </strong>
                 </h4>
                 </div>
                 <!--Card content-->

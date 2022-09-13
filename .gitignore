@@ -11,3 +11,6 @@ venv/
 
 # Environment Variables
 .env
+
+# Media
+media/
