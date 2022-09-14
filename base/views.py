@@ -8,7 +8,7 @@ class HomePageView(ListView):
     model = Item
     context_object_name = 'item_list'
     template_name = 'base/index.html'
-    paginate_by = 8
+    paginate_by = 12
 
     def get_queryset(self, *args, **kwargs):
         query = self.request.GET.get('q')
