@@ -52,7 +52,8 @@
                 {{ item.description }}
               </p>
 
-              {% comment %} <form class="d-flex justify-content-left" action="{% url 'base:add_to_cart' item.slug %}">
+              <form class="d-flex justify-content-left" action="{{ item.get_add_to_cart_url }}" method="POST">
+                {% csrf_token %} 
                 <!-- Default input -->
                 <input
                   type="number"
@@ -60,19 +61,20 @@
                   aria-label="Search"
                   class="form-control"
                   style="width: 100px"
+                  name="quantity"
                 />
                 <button class="btn btn-primary btn-md my-0 p" type="submit">
                   Add to cart
                   <i class="fas fa-shopping-cart ml-1"></i>
                 </button>
-              </form> {% endcomment %}
-              <a href="{{ item.get_add_to_cart_url }}" class="btn btn-primary btn-md my-0 p">
+              </form>
+              {% comment %} <a href="{{ item.get_add_to_cart_url }}" class="btn btn-primary btn-md my-0 p">
                 Add to cart
                 <i class="fas fa-shopping-cart ml-1"></i>
               </a>
               <a href="{{ item.get_remove_from_cart_url }}" class="btn btn-danger btn-md my-0 p">
                 Remove from cart
-              </a>
+              </a> {% endcomment %}
             </div>
             <!--Content-->
           </div>

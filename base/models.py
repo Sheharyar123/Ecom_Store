@@ -40,13 +40,19 @@ class Item(models.Model):
         super(Item, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse("base:item_detail", kwargs={"slug": self.slug})
+        return reverse("base:product", kwargs={"slug": self.slug})
 
     def get_add_to_cart_url(self):
         return reverse("base:add_to_cart", kwargs={"slug": self.slug})
 
     def get_remove_from_cart_url(self):
         return reverse("base:remove_from_cart", kwargs={"slug": self.slug})
+
+    def get_add_single_to_cart_url(self):
+        return reverse("base:add_single_to_cart", kwargs={"slug": self.slug})
+
+    def get_remove_single_from_cart_url(self):
+        return reverse("base:remove_single_from_cart", kwargs={"slug": self.slug})
     
 
     # @property
@@ -60,7 +66,7 @@ class OrderItem(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='orderitems',
                             null=True, blank=True)
     item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='orderitems')
-    quantity = models.IntegerField(default=1)
+    quantity = models.IntegerField(default=0)
     ordered = models.BooleanField(default=False)
     added_on = models.DateTimeField(auto_now_add=True)
 
